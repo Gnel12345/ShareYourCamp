@@ -12,7 +12,7 @@
          <nav class="navbar navbar-default">
         <div class = "container-fluid">
             <div class = "navbar-header">
-                <a class = "navbar-brand" href = "/">WorldCamp</a>
+                <a class = "navbar-brand" href = "/">ShareYourCamp</a>
             </div>
             <div class = "collapse navbar-collapse">
                 <ul class = "nav navbar-nav navbar-right">
@@ -28,3 +28,16 @@
             </div>
         </div>
     </nav>
+    <div class = "container">
+        <% if(error && error.length >0){ %>
+    <div class="alert alert-danger" role="alert">
+  <%= error %>
+</div>
+<% } %>
+<% if(success && success.length >0){ %>
+<div class="alert alert-success" role="alert">
+  <%= success %>
+</div>
+<% } %>
+</div>
+    
