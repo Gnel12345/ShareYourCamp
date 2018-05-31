@@ -72,6 +72,10 @@
     var infowindow = new google.maps.InfoWindow({
       content: contentString
     });
+    var weatherLayer = new google.maps.weather.WeatherLayer({
+  temperatureUnits: google.maps.weather.TemperatureUnit.FAHRENHEIT
+});
+weatherLayer.setMap(map);
     var marker = new google.maps.Marker({
         position: center,
         map: map
@@ -81,6 +85,7 @@
     });
   }
 </script>
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBAsiDSumZIXFPNWr0kQuoynuI9BjydKa8&callback=initMap"></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?libraries=weather&sensor=false key=AIzaSyBAsiDSumZIXFPNWr0kQuoynuI9BjydKa8&callback=initMap"></script>
+<script src="https://www.amdoren.com/api/weather.php?api_key=4zNFWdVAaxJq7a643XG3972s7AEnxJx&&callback=initMap"></script>
 
 <% include ../partials/footer %>
