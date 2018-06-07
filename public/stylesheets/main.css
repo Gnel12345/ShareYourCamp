@@ -31,3 +31,11 @@
     padding: 0% 0% 0%;
     margin: 0%,0%,0%,0%;
 }
+#lake{
+ background-image: url("/img/lake.gif");
+    background-repeat: no-repeat;
+   background-size: 100%;
+   padding-bottom: 20%;
+    padding: 0% 0% 0%;
+    margin: 0%,0%,0%,0%;   
+}
