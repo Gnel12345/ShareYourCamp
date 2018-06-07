@@ -26,8 +26,8 @@
 #campfire{
     background-image: url("/img/campfire.gif");
     background-repeat: no-repeat;
-   background-size: auto;
-   margin-left: 50%;
+   background-size: cover;
+   
    padding-bottom: 20%;
     padding: 0% 0% 0%;
     margin: 0%,0%,0%,0%;
