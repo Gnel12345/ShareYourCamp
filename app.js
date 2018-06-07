@@ -9,7 +9,8 @@ var express     = require("express"),
     Campground  = require("./models/campground"),
     Comment     = require("./models/comment"),
     User        = require("./models/user"),
-    seedDB      = require("./seeds")
+    seedDB      = require("./seeds"),
+    serveStatic = require("serve-static");
     
 //requiring routes
 var commentRoutes    = require("./routes/comments"),
@@ -24,6 +25,7 @@ mongoose.connect("mongodb://glenn:pepper@ds115035.mlab.com:15035/shareyourcamp")
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
+app.use(serveStatic("img"));
 app.use(express.static(__dirname + "/public"));
 app.use(methodOverride("_method"));
 app.use(flash());
@@ -37,6 +39,7 @@ app.use(require("express-session")({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
+
 passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
