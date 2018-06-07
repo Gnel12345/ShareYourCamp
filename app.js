@@ -15,7 +15,7 @@ var express     = require("express"),
 //requiring routes
 var commentRoutes    = require("./routes/comments"),
     campgroundRoutes = require("./routes/campgrounds"),
-    indexRoutes      = require("./routes/index")
+    indexRoutes      = require("./routes/index");
 
 
 // check the mlab credentials and database hostname/port
