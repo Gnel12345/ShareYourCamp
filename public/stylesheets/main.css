@@ -24,6 +24,9 @@
    height: 100px;
    color: white;
 }
+#intro{
+    color:white;
+}
 #campfire{
     background-image: url("/img/campfire.gif");
     background-repeat: no-repeat;
