@@ -4,7 +4,5 @@ function hoverFunction() {
     document.getElementById("myDropdown").classList.toggle("show");
 }
 
-function nothoverFunction(){
-  document.getElementById("myDropdown").classList.toggle("hide");
-}
+
 
