@@ -19,7 +19,7 @@ var commentRoutes    = require("./routes/comments"),
 
 
 // check the mlab credentials and database hostname/port
-mongoose.connect("mongodb://glenn:pepper@ds115035.mlab.com:15035/shareyourcamp");
+mongoose.connect("mongodb://");
 //mongoose.connect("mongodb://localhost/yelp_camp");
 
 
