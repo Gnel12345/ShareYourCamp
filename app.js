@@ -10,7 +10,8 @@ var express     = require("express"),
     Comment     = require("./models/comment"),
     User        = require("./models/user"),
     seedDB      = require("./seeds"),
-    serveStatic = require("serve-static");
+    serveStatic = require("serve-static"),
+    Mongo = require("./private/private");
     
 //requiring routes
 var commentRoutes    = require("./routes/comments"),
@@ -19,7 +20,7 @@ var commentRoutes    = require("./routes/comments"),
 
 
 // check the mlab credentials and database hostname/port
-mongoose.connect("mongodb://");
+mongoose.connect(Mongo);
 //mongoose.connect("mongodb://localhost/yelp_camp");
 
 
