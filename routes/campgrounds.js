@@ -60,7 +60,9 @@ router.post("/", middleware.isLoggedIn, upload.single('image'), function(req, re
       return res.redirect('back');
     }
     res.redirect('/campgrounds/' + campground.id);
+    });
   });
+  });  
 });
 
 //NEW - show form to create new campground
