@@ -54,7 +54,7 @@ router.post("/", middleware.isLoggedIn, upload.single('image'), function(req, re
     var lng = data.results[0].geometry.location.lng;
     var location = data.results[0].formatted_address;
    var newCampground = {name: name, image: image, description: desc, cost: cost, author:author, location: location, lat: lat, lng: lng};
-  Campground.create(req.body.campground,function(err, campground) {
+  Campground.create(req.body.campground,newCampground, function(err, campground) {
     if (err) {
       req.flash('error', err.message);
       return res.redirect('back');
