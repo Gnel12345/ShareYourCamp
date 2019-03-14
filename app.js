@@ -19,8 +19,8 @@ var commentRoutes    = require("./routes/comments"),
 
 
 // check the mlab credentials and database hostname/port
-mongoose.connect(process.env.DATABASEURL);
-//mongoose.connect(process.env.DATABASEURLTEST);
+//mongoose.connect(process.env.DATABASEURL);
+mongoose.connect(process.env.DATABASEURLTEST);
 
 
 
