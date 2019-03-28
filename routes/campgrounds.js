@@ -65,7 +65,7 @@ router.post("/", middleware.isLoggedIn, upload.single('image'), function(req, re
             console.log(newlyCreated);
             res.redirect("/campgrounds");
         }
-    
+    });
     });
   });
 });
