@@ -3,7 +3,27 @@ var router  = express.Router();
 var Campground = require("../models/campground");
 var middleware = require("../middleware");
 var geocoder = require('geocoder');
+var multer = require('multer');
+var storage = multer.diskStorage({
+  filename: function(req, file, callback) {
+    callback(null, Date.now() + file.originalname);
+  }
+});
+var imageFilter = function (req, file, cb) {
+    // accept image files only
+    if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/i)) {
+        return cb(new Error('Only image files are allowed!'), false);
+    }
+    cb(null, true);
+};
+var upload = multer({ storage: storage, fileFilter: imageFilter})
 
+var cloudinary = require('cloudinary');
+cloudinary.config({ 
+  cloud_name: 'dysbtunkc', 
+  api_key: 974233934498768, 
+  api_secret: nKNWlM4zXxWK4yJdJhX-UE5QOOQ
+});
 
 //INDEX - show all campgrounds
 router.get("/", function(req, res){
@@ -18,10 +38,11 @@ router.get("/", function(req, res){
 });
 
 //CREATE - add new campground to DB
-router.post("/", middleware.isLoggedIn, function(req, res){
+router.post("/", middleware.isLoggedIn, upload.single('image'), function(req, res) {
   // get data from form and add to campgrounds array
   var name = req.body.name;
   var image = req.body.image;
+  req.body.campground.image = result.secure_url;
   var desc = req.body.description;
   var author = {
       id: req.user._id,
@@ -29,6 +50,8 @@ router.post("/", middleware.isLoggedIn, function(req, res){
   }
   var cost = req.body.cost;
   geocoder.geocode(req.body.location, function (err, data) {
+      cloudinary.uploader.upload(req.file.path, function(result) {
+  // add cloudinary url for the image to the campground object under image property
     var lat = data.results[0].geometry.location.lat;
     var lng = data.results[0].geometry.location.lng;
     var location = data.results[0].formatted_address;
@@ -42,6 +65,7 @@ router.post("/", middleware.isLoggedIn, function(req, res){
             console.log(newlyCreated);
             res.redirect("/campgrounds");
         }
+    
     });
   });
 });
