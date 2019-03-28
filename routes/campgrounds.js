@@ -40,6 +40,10 @@ router.get("/", function(req, res){
 //CREATE - add new campground to DB
 router.post("/", middleware.isLoggedIn, upload.single('image'), function(req, res) {
   // get data from form and add to campgrounds array
+  
+  geocoder.geocode(req.body.location, function (err, data) {
+      cloudinary.uploader.upload(req.file.path, function(result) {
+  // add cloudinary url for the image to the campground object under image property
   var name = req.body.name;
   var image = result.secure_url;
   
@@ -49,9 +53,6 @@ router.post("/", middleware.isLoggedIn, upload.single('image'), function(req, re
       username: req.user.username
   }
   var cost = req.body.cost;
-  geocoder.geocode(req.body.location, function (err, data) {
-      cloudinary.uploader.upload(req.file.path, function(result) {
-  // add cloudinary url for the image to the campground object under image property
     var lat = data.results[0].geometry.location.lat;
     var lng = data.results[0].geometry.location.lng;
     var location = data.results[0].formatted_address;
