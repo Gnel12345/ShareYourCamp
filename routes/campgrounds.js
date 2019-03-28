@@ -41,8 +41,8 @@ router.get("/", function(req, res){
 router.post("/", middleware.isLoggedIn, upload.single('image'), function(req, res) {
   // get data from form and add to campgrounds array
   var name = req.body.name;
-  var image = req.body.image;
-  req.body.campground.image = result.secure_url;
+  var image = result.secure_url;
+  
   var desc = req.body.description;
   var author = {
       id: req.user._id,
