@@ -22,7 +22,7 @@ var cloudinary = require('cloudinary');
 cloudinary.config({ 
   cloud_name: 'dysbtunkc', 
   api_key: 974233934498768, 
-  api_secret: nKNWlM4zXxWK4yJdJhX-UE5QOOQ
+  api_secret: 'nKNWlM4zXxWK4yJdJhX-UE5QOOQ'
 });
 
 //INDEX - show all campgrounds
