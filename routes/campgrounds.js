@@ -45,7 +45,8 @@ router.post("/", middleware.isLoggedIn, upload.single('image'), function(req, re
       cloudinary.uploader.upload(req.file.path, function(result) {
   // add cloudinary url for the image to the campground object under image property
   var name = req.body.name;
-  var image = result.secure_url;
+   req.body.campground.image = result.secure_url;
+  var image = req.body.campground.image;
   
   var desc = req.body.description;
   var author = {
