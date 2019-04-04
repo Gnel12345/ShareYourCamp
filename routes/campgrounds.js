@@ -56,6 +56,7 @@ router.post("/", middleware.isLoggedIn, upload.single('image'), function(req, re
   var cost = req.body.cost;
   geocoder.geocode(req.body.location, function (err, data) {
       if(err || !data.length){
+        
           req.flash('error','Invalid address');
           res.redirect('back');
       }
