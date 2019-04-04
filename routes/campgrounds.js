@@ -2,7 +2,14 @@ var express = require("express");
 var router  = express.Router();
 var Campground = require("../models/campground");
 var middleware = require("../middleware");
-var geocoder = require('geocoder');
+var NodeGeocoder = require('node-geocoder');
+var options = {
+    provider : 'google',
+    httpAdapter :'https',
+    apiKey:'process.env.GEOCODERAPIKEY',
+    formatter :'null'
+};
+var geocoder=NodeGeocoder(options);
 var multer = require('multer');
 var storage = multer.diskStorage({
   filename: function(req, file, callback) {
@@ -54,7 +61,7 @@ router.post("/", middleware.isLoggedIn, upload.single('image'), function(req, re
       }
       var lat = data.results[0].latitude;
     var lng = data.results[0].longitude;
-    var location = data.results[0].formatted_address
+    var location = data.results[0].formatted_address;
       
       cloudinary.uploader.upload(req.file.path, function(result) {
   // add cloudinary url for the image to the campground object under image property
