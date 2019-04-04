@@ -42,36 +42,22 @@ router.post("/", middleware.isLoggedIn, upload.single('image'), function(req, re
   // get data from form and add to campgrounds array
   
   
-  geocoder.geocode(req.body.location, function (err, data) {
-      var lat = data.results[0].geometry.location.lat;
-    var lng = data.results[0].geometry.location.lng;
-    var location = data.results[0].formatted_address;
-      cloudinary.uploader.upload(req.file.path, function(result) {
+  cloudinary.uploader.upload(req.file.path, function(result) {
   // add cloudinary url for the image to the campground object under image property
-  var name = req.body.name;
-   req.body.campground.image = result.secure_url;
-  
-  
-  var desc = req.body.description;
-  var author = {
-      id: req.user._id,
-      username: req.user.username
+  req.body.campground.image = result.secure_url;
+  // add author to campground
+  req.body.campground.author = {
+    id: req.user._id,
+    username: req.user.username
   }
-  var cost = req.body.cost;
-    
-    var newCampground = {name: name, image: req.body.campground.image, description: desc, cost: cost, author:author, location: location, lat: lat, lng: lng};
-    // Create a new campground and save to DB
-    Campground.create(newCampground, function(err, newlyCreated){
-        if(err){
-            console.log(err);
-        } else {
-            //redirect back to campgrounds page
-            console.log(newlyCreated);
-            res.redirect("/campgrounds");
-        }
-    });
-    });
+  Campground.create(req.body.campground, function(err, campground) {
+    if (err) {
+      req.flash('error', err.message);
+      return res.redirect('back');
+    }
+    res.redirect('/campgrounds/' + campground.id);
   });
+});
 });
 //NEW - show form to create new campground
 router.get("/new", middleware.isLoggedIn, function(req, res){
