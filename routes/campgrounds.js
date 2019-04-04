@@ -45,10 +45,7 @@ router.post("/", middleware.isLoggedIn, upload.single('image'), function(req, re
   
       cloudinary.uploader.upload(req.file.path, function(result) {
   // add cloudinary url for the image to the campground object under image property
-  geocoder.geocode(req.body.location, function (err, data) {
-      var lat = data.results[0].geometry.location.lat;
-    var lng = data.results[0].geometry.location.lng;
-    var location = data.results[0].formatted_address;
+  
   var name = req.body.name;
    req.body.campground.image = result.secure_url;
   
@@ -60,7 +57,7 @@ router.post("/", middleware.isLoggedIn, upload.single('image'), function(req, re
   }
   var cost = req.body.cost;
     
-    var newCampground = {name: name, image: req.body.campground.image, description: desc, cost: cost, author:author, location: location, lat: lat, lng: lng};
+    var newCampground = {name: name, image: req.body.campground.image, description: desc, cost: cost, author:author};
     // Create a new campground and save to DB
     Campground.create(newCampground, function(err, newlyCreated){
         if(err){
@@ -73,7 +70,7 @@ router.post("/", middleware.isLoggedIn, upload.single('image'), function(req, re
     });
     });
   });
-});
+
 //NEW - show form to create new campground
 router.get("/new", middleware.isLoggedIn, function(req, res){
    res.render("campgrounds/new"); 
