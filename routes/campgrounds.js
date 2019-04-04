@@ -41,23 +41,28 @@ router.get("/", function(req, res){
 router.post("/", middleware.isLoggedIn, upload.single('image'), function(req, res) {
   // get data from form and add to campgrounds array
   
-  
+   var desc = req.body.description;
+  var author = {
+      id: req.user._id,
+      username: req.user.username
+  }
+  var cost = req.body.cost;
   geocoder.geocode(req.body.location, function (err, data) {
-      var lat = data.results[0].geometry.location.lat
-    var lng = data.results[0].geometry.location.lng;
-    var location = data.results[0].formatted_address;
+      if(err || !data.length){
+          req.flash('error','Invalid address');
+          res.redirect('back');
+      }
+      var lat = data.results[0].latitude;
+    var lng = data.results[0].longitude;
+    var location = data.results[0].formatted_address
+      
       cloudinary.uploader.upload(req.file.path, function(result) {
   // add cloudinary url for the image to the campground object under image property
   var name = req.body.name;
    req.body.campground.image = result.secure_url;
   
   
-  var desc = req.body.description;
-  var author = {
-      id: req.user._id,
-      username: req.user.username
-  }
-  var cost = req.body.cost;
+ 
     
     var newCampground = {name: name, image: req.body.campground.image, description: desc, cost: cost, author:author, location: location, lat: lat, lng: lng};
     // Create a new campground and save to DB
