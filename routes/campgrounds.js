@@ -6,7 +6,7 @@ var NodeGeocoder = require("node-geocoder");
 var options = {
     provider : 'google',
     httpAdapter :'https',
-    apiKey:'process.env.GEOCODER_API_KEY',
+    apiKey:'AIzaSyBAsiDSumZIXFPNWr0kQuoynuI9BjydKa8',
     formatter :'null'
 };
 var geocoder=NodeGeocoder(options);
@@ -60,9 +60,9 @@ router.post("/", middleware.isLoggedIn, upload.single('image'), function(req, re
           req.flash('error','Invalid address');
           res.redirect('back');
       }
-      var lat = data[1].latitude;
-    var lng = data[1].longitude;
-    var location = data[1].formattedAddress;
+      var lat = data[0].latitude;
+    var lng = data[0].longitude;
+    var location = data[0].formattedAddress;
       
      
   // add cloudinary url for the image to the campground object under image property
