@@ -2,7 +2,7 @@ var express = require("express");
 var router  = express.Router();
 var Campground = require("../models/campground");
 var middleware = require("../middleware");
-require("dotenv/config");
+require("dotenv").config();
 var NodeGeocoder = require("node-geocoder");
 var options = {
     provider : 'google',
