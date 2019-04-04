@@ -59,9 +59,9 @@ router.post("/", middleware.isLoggedIn, upload.single('image'), function(req, re
           req.flash('error','Invalid address');
           res.redirect('back');
       }
-      var lat = data.results[0].latitude;
-    var lng = data.results[0].longitude;
-    var location = data.results[0].formatted_address;
+      var lat = data[0].latitude;
+    var lng = data[0].longitude;
+    var location = data[0].formatted_address;
       
       cloudinary.uploader.upload(req.file.path, function(result) {
   // add cloudinary url for the image to the campground object under image property
