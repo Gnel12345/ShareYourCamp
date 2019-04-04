@@ -2,12 +2,12 @@ var express = require("express");
 var router  = express.Router();
 var Campground = require("../models/campground");
 var middleware = require("../middleware");
-
+require('dotenv').config();
 var NodeGeocoder = require("node-geocoder");
 var options = {
     provider : 'google',
     httpAdapter :'https',
-    apiKey:process.env.GEOCODER_API_KEY,
+    apiKey : process.env.GEOCODER_API_KEY,
     formatter :null
 };
 var geocoder=NodeGeocoder(options);
